@@ -1,0 +1,18 @@
+[project]
+name = "devtrack"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "SQLAlchemy",
+    "pydantic",
+    "psycopg2-binary",
+    "python-multipart",
+    "passlib",
+    "bcrypt<4.*",
+    "python-jose",
+    "python-dotenv>=1.1.0",
+]
