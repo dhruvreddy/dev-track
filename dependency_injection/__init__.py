@@ -14,6 +14,7 @@ from .injection import (
     pause_task_di,
     resume_task_di,
     end_task_di,
+    update_task_priority_di,
 
     # Report
     get_weekly_report_user_di,
@@ -41,6 +42,7 @@ __all__ = (
     "pause_task_di",
     "resume_task_di",
     "end_task_di",
+    "update_task_priority_di",
 
     # Report
     "get_weekly_report_user_di",

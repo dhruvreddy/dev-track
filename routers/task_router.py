@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from dependency_injection import add_task_di, start_task_di, pause_task_di, resume_task_di, end_task_di
+from dependency_injection import add_task_di, start_task_di, pause_task_di, resume_task_di, end_task_di, update_task_priority_di
 
 router = APIRouter(
     prefix="/task",
@@ -26,4 +26,8 @@ def start_task_api(result = Depends(resume_task_di)):
 
 @router.post("/end_task")
 def start_task_api(result = Depends(end_task_di)):
+    return result
+
+@router.post("/update_task_priority")
+def update_task_priority_api(result = Depends(update_task_priority_di)):
     return result

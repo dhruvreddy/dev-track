@@ -3,13 +3,17 @@ from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from enums import UserRole, TaskStatus
+from enums import UserRole, TaskStatus, TaskPriority
 from models import User, Task
 from schemas import TaskSchema
 
 class TaskRepository(ABC):
     @abstractmethod
     def add_task(self, user: User, task: TaskSchema, session: Session):
+        pass
+
+    @abstractmethod
+    def update_task_priority(self, user: User, task_id: int, priority: TaskPriority, session: Session):
         pass
 
     @abstractmethod
@@ -30,6 +34,11 @@ class TaskRepository(ABC):
 
 class TaskRepositoryImpl(TaskRepository):
     def add_task(self, user: User, task: TaskSchema, session: Session):
+        if not user or user.role == UserRole.VIEWER:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User unauthorized"
+            )
         new_task = Task(
             title=task.title,
             description=task.description,
@@ -39,6 +48,20 @@ class TaskRepositoryImpl(TaskRepository):
         session.commit()
         session.refresh(new_task)
         return new_task
+
+    def update_task_priority(self, user: User, task_id: int, priority: TaskPriority, session: Session):
+        if not user or user.role == UserRole.VIEWER:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User unauthorized"
+            )
+        task = session.query(Task).filter(Task.id == task_id, Task.user_id == user.id).first()
+        task.priority = priority
+        session.commit()
+        return {
+            "message": "successful",
+            "status": status.HTTP_200_OK
+        }
 
     def start_task(self, user: User, task_id: int, session: Session):
         if user.role == UserRole.VIEWER:

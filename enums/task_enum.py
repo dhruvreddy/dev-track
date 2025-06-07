@@ -6,6 +6,6 @@ class TaskStatus(Enum):
     DONE = "done"
 
 class TaskPriority(Enum):
-    HIGH = 3
-    MEDIUM = 2
-    LOW = 1
+    HIGH = "high"
+    MEDIUM = "medium"
+    LOW = "low"

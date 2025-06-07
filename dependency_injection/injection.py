@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 # Local Imports
-from enums import UserRole
+from enums import UserRole, TaskPriority
 from utils import engine, Session as Con
 from models import Base
 from models import User
@@ -65,6 +65,9 @@ def resume_task_di(task_id: int, session: Session = Depends(get_db), user: User 
 
 def end_task_di(task_id: int, session: Session = Depends(get_db), user: User = Depends(get_user_di)):
     return task_repo.end_task(user=user, task_id=task_id, session=session)
+
+def update_task_priority_di(priority: TaskPriority, task_id: int, session: Session = Depends(get_db), user: User = Depends(get_user_di)):
+    return task_repo.update_task_priority(priority=priority, task_id=task_id, session=session, user=user)
 
 # Report
 
