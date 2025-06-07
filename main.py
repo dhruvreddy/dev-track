@@ -3,11 +3,12 @@ import uvicorn
 
 from dependency_injection import create_all_di
 from enums import UserRole
-from routers import user_router, token_router, task_router
+from routers import user_router, token_router, task_router, report_router
 app = FastAPI()
 app.include_router(user_router)
 app.include_router(token_router)
 app.include_router(task_router)
+app.include_router(report_router)
 
 @app.get("/")
 def home():

@@ -15,6 +15,10 @@ from .injection import (
     resume_task_di,
     end_task_di,
 
+    # Report
+    get_weekly_report_user_di,
+    get_weekly_report_task_di,
+
     # Repo
     get_user_repository,
     get_auth_repository,
@@ -37,6 +41,10 @@ __all__ = (
     "pause_task_di",
     "resume_task_di",
     "end_task_di",
+
+    # Report
+    "get_weekly_report_user_di",
+    "get_weekly_report_task_di",
 
     # Repo
     "get_user_repository",

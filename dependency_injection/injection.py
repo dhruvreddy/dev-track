@@ -9,7 +9,7 @@ from utils import engine, Session as Con
 from models import Base
 from models import User
 from schemas import UserSchema, TaskSchema
-from repositories import UserRepositoryImpl, AuthRepositoryImpl, TaskRepositoryImpl
+from repositories import UserRepositoryImpl, AuthRepositoryImpl, TaskRepositoryImpl, ReportRepositoryImpl
 
 oauth = OAuth2PasswordBearer("/token")
 
@@ -18,6 +18,8 @@ user_repo = UserRepositoryImpl()
 auth_repo = AuthRepositoryImpl()
 
 task_repo = TaskRepositoryImpl()
+
+report_repo = ReportRepositoryImpl()
 
 #Database
 
@@ -63,6 +65,14 @@ def resume_task_di(task_id: int, session: Session = Depends(get_db), user: User 
 
 def end_task_di(task_id: int, session: Session = Depends(get_db), user: User = Depends(get_user_di)):
     return task_repo.end_task(user=user, task_id=task_id, session=session)
+
+# Report
+
+def get_weekly_report_user_di(user = Depends(get_user_di), session = Depends(get_db)):
+    return report_repo.get_weekly_report_user(user=user, session=session)
+
+def get_weekly_report_task_di(task_id: int, user = Depends(get_user_di), session = Depends(get_db)):
+    return report_repo.get_weekly_report_task(task_id=task_id, user=user, session=session)
 
 # Repository Classes
 
