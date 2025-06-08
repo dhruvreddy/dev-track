@@ -12,22 +12,22 @@ router = APIRouter(
 def add_task_api(result = Depends(add_task_di)):
     return result
 
-@router.post("/start_task")
+@router.patch("/start_task")
 def start_task_api(result = Depends(start_task_di)):
     return result
 
-@router.post("/pause_task")
+@router.patch("/pause_task")
 def start_task_api(result = Depends(pause_task_di)):
     return result
 
-@router.post("/resume_task")
+@router.patch("/resume_task")
 def start_task_api(result = Depends(resume_task_di)):
     return result
 
-@router.post("/end_task")
+@router.patch("/end_task")
 def start_task_api(result = Depends(end_task_di)):
     return result
 
-@router.post("/update_task_priority")
+@router.patch("/update_task_priority")
 def update_task_priority_api(result = Depends(update_task_priority_di)):
     return result

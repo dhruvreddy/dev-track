@@ -12,6 +12,6 @@ router = APIRouter(
 def user_signup_api(result = Depends(add_user_di)):
     return result
 
-@router.post("/update_user_role")
+@router.patch("/update_user_role")
 def update_user_role_api(result = Depends(update_user_role_di)):
     return result
