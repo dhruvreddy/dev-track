@@ -2,7 +2,6 @@ from fastapi import FastAPI, Response, status
 import uvicorn
 
 from dependency_injection import create_all_di
-from enums import UserRole
 from routers import user_router, token_router, task_router, report_router
 app = FastAPI()
 app.include_router(user_router)
@@ -16,4 +15,4 @@ def home():
 
 if __name__ == "__main__":
     create_all_di()
-    uvicorn.run(app="main:app", host="localhost", port=8000, reload=True)
+    uvicorn.run(app="main:app", host="0.0.0.0", port=8000, reload=True)
